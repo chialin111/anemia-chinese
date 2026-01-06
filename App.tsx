@@ -312,15 +312,15 @@ export default function App() {
   return (
     <div className="min-h-screen bg-slate-100/50 text-slate-800 pb-20 font-sans text-base">
       {/* Header - Vibrant Gradient */}
-      <header className="bg-gradient-to-r from-blue-700 via-indigo-700 to-violet-700 text-white p-8 shadow-xl relative overflow-hidden">
+      <header className="bg-gradient-to-r from-blue-700 via-indigo-700 to-violet-700 text-white p-5 md:p-8 shadow-xl relative overflow-hidden">
         {/* Decorative Background Circles */}
         <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-white/5 blur-3xl"></div>
         <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-60 h-60 rounded-full bg-white/10 blur-2xl"></div>
 
         <div className="max-w-4xl mx-auto flex items-center justify-between relative z-10">
           <div>
-            <h1 className="text-2xl md:text-3xl font-extrabold flex items-center gap-4 tracking-tight drop-shadow-sm">
-              <div className="w-14 h-14 md:w-16 md:h-16 bg-white rounded-full flex items-center justify-center shadow-lg border-2 border-white/20 shrink-0 overflow-hidden p-1">
+            <h1 className="text-xl md:text-3xl font-extrabold flex items-center gap-3 md:gap-4 tracking-tight drop-shadow-sm">
+              <div className="w-12 h-12 md:w-16 md:h-16 bg-white rounded-full flex items-center justify-center shadow-lg border-2 border-white/20 shrink-0 overflow-hidden p-1">
                 {!logoError ? (
                   <img
                     src={`${import.meta.env.BASE_URL}cch_logo.png`}
@@ -335,10 +335,10 @@ export default function App() {
               </div>
               <div className="flex flex-col">
                 <span>Anemia Management Assistant</span>
-                <span className="text-sm md:text-lg font-medium text-cyan-100 opacity-90 mt-1">(based on 2026 KDIGO Guideline)</span>
+                <span className="text-xs md:text-lg font-medium text-cyan-100 opacity-90 mt-0.5 md:mt-1">(based on 2026 KDIGO Guideline)</span>
               </div>
             </h1>
-            <p className="text-indigo-100 text-sm md:text-base mt-3 font-medium opacity-90 ml-1">Clinical Decision Support System</p>
+            <p className="text-indigo-100 text-xs md:text-base mt-2 md:mt-3 font-medium opacity-90 ml-1">Clinical Decision Support System</p>
           </div>
           <div className="hidden md:block text-sm text-cyan-100 border border-white/20 bg-white/10 px-5 py-2.5 rounded-full font-semibold backdrop-blur-md shadow-sm">
             Professional Edition • v1.1
@@ -361,15 +361,15 @@ export default function App() {
                 <button
                   key={s.id}
                   onClick={() => setStage(s.id)}
-                  className="relative z-10 flex flex-col items-center group cursor-pointer focus:outline-none w-24 md:w-32"
+                  className="relative z-10 flex flex-col items-center group cursor-pointer focus:outline-none w-20 md:w-32"
                 >
-                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center font-bold text-xl transition-all duration-300 shadow-md group-hover:scale-105 shrink-0
+                  <div className={`w-12 h-12 md:w-14 md:h-14 rounded-2xl flex items-center justify-center font-bold text-lg md:text-xl transition-all duration-300 shadow-md group-hover:scale-105 shrink-0
                     ${isActive ? 'bg-indigo-600 text-white shadow-indigo-200 scale-110 ring-4 ring-indigo-50 rotate-3' :
                       isPast ? 'bg-indigo-50 text-indigo-600 border-2 border-indigo-100 group-hover:bg-indigo-100' : 'bg-white text-slate-300 border-2 border-slate-100 group-hover:border-indigo-200 group-hover:text-slate-400'}
                   `}>
-                    {isPast ? <CheckCircle className="w-7 h-7" /> : s.id}
+                    {isPast ? <CheckCircle className="w-6 h-6 md:w-7 md:h-7" /> : s.id}
                   </div>
-                  <span className={`text-sm mt-3 font-bold uppercase tracking-wide text-center leading-tight transition-colors ${isActive ? 'text-indigo-700' : 'text-slate-400 group-hover:text-slate-500'}`}>
+                  <span className={`text-[10px] md:text-sm mt-2 md:mt-3 font-bold uppercase tracking-wide text-center leading-tight transition-colors ${isActive ? 'text-indigo-700' : 'text-slate-400 group-hover:text-slate-500'}`}>
                     {s.label}
                   </span>
                 </button>
@@ -379,7 +379,7 @@ export default function App() {
         </div>
 
         {/* Dynamic Stage Content */}
-        <Card className="p-6 md:p-12 animate-fade-in-up border-t-[8px] border-t-indigo-500">
+        <Card className="p-4 md:p-12 animate-fade-in-up border-t-[8px] border-t-indigo-500">
 
           {/* STAGE 1: SCREENING */}
           {stage === Stage.Screening && (
@@ -387,9 +387,9 @@ export default function App() {
               <div className="border-b border-slate-100 pb-6 mb-2">
                 <div className="flex items-center gap-4 mb-3">
                   <div className="p-3 bg-sky-100 rounded-xl text-sky-600">
-                    <Droplet className="w-8 h-8" strokeWidth={2.5} />
+                    <Droplet className="w-6 h-6 md:w-8 md:h-8" strokeWidth={2.5} />
                   </div>
-                  <h2 className="text-3xl font-bold text-slate-800">Patient Demographics & Labs</h2>
+                  <h2 className="text-xl md:text-3xl font-bold text-slate-800">Patient Demographics & Labs</h2>
                 </div>
                 <p className="text-slate-500 text-lg pl-1">Enter initial parameters to stratify patient risk.</p>
               </div>
@@ -815,12 +815,13 @@ export default function App() {
               <ChevronLeft className="w-5 h-5" /> Back
             </button>
 
+
             {/* Standard Next Button */}
             {recommendation?.status !== 'stop' && stage !== Stage.ESAManagement && (
               <button
                 onClick={handleNext}
                 disabled={!canProceed()}
-                className={`flex items-center gap-2 px-10 py-3.5 rounded-xl font-bold text-lg transition-all shadow-lg
+                className={`flex items-center gap-2 px-6 md:px-10 py-3.5 rounded-xl font-bold text-lg transition-all shadow-lg w-full md:w-auto justify-center
                   ${!canProceed()
                     ? 'bg-slate-200 text-slate-400 cursor-not-allowed shadow-none'
                     : 'bg-gradient-to-r from-indigo-600 to-blue-600 text-white hover:from-indigo-700 hover:to-blue-700 hover:shadow-indigo-200 hover:-translate-y-1'}
