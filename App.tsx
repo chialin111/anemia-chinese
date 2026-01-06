@@ -352,8 +352,8 @@ export default function App() {
         {/* Progress Stepper - Optimized Visuals */}
         {/* Progress Stepper - Optimized Visuals & Sticky Navigation */}
         <div className="sticky top-0 z-40 bg-slate-100/95 backdrop-blur-sm py-4 -mx-4 md:-mx-6 px-4 md:px-14 mb-10 shadow-sm border-b border-slate-200/50 transition-all">
-          <div className="flex justify-between items-center relative max-w-4xl mx-auto">
-            <div className="absolute top-1/2 left-0 w-full h-1.5 bg-slate-200 -z-0 rounded-full"></div>
+          <div className="flex justify-between items-start relative max-w-4xl mx-auto">
+            <div className="absolute top-7 left-0 w-full h-1.5 bg-slate-200 -z-0 rounded-full -mt-0.5"></div>
             {stages.map((s, idx) => {
               const isActive = stage === s.id;
               const isPast = stage > s.id;
@@ -361,15 +361,15 @@ export default function App() {
                 <button
                   key={s.id}
                   onClick={() => setStage(s.id)}
-                  className="relative z-10 flex flex-col items-center group cursor-pointer focus:outline-none"
+                  className="relative z-10 flex flex-col items-center group cursor-pointer focus:outline-none w-24 md:w-32"
                 >
-                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center font-bold text-xl transition-all duration-300 shadow-md group-hover:scale-105
+                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center font-bold text-xl transition-all duration-300 shadow-md group-hover:scale-105 shrink-0
                     ${isActive ? 'bg-indigo-600 text-white shadow-indigo-200 scale-110 ring-4 ring-indigo-50 rotate-3' :
                       isPast ? 'bg-indigo-50 text-indigo-600 border-2 border-indigo-100 group-hover:bg-indigo-100' : 'bg-white text-slate-300 border-2 border-slate-100 group-hover:border-indigo-200 group-hover:text-slate-400'}
                   `}>
                     {isPast ? <CheckCircle className="w-7 h-7" /> : s.id}
                   </div>
-                  <span className={`text-sm mt-3 font-bold uppercase tracking-wide transition-colors ${isActive ? 'text-indigo-700' : 'text-slate-400 group-hover:text-slate-500'}`}>
+                  <span className={`text-sm mt-3 font-bold uppercase tracking-wide text-center leading-tight transition-colors ${isActive ? 'text-indigo-700' : 'text-slate-400 group-hover:text-slate-500'}`}>
                     {s.label}
                   </span>
                 </button>
