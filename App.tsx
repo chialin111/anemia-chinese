@@ -802,6 +802,19 @@ export default function App() {
 
           {/* RECOMMENDATION DISPLAY */}
           <div ref={resultRef}>
+            {/* Regulatory Warning for ND-CKD + HIF-PHI */}
+            {recommendation?.title.includes('Recommendation: HIF-PHI') && patient.group === PatientGroup.ND_CKD && (
+              <div className="bg-amber-50 border-l-[6px] border-amber-500 text-amber-900 p-6 md:p-8 rounded-r-2xl shadow-sm mb-6 flex items-start gap-4 animate-fade-in mt-10">
+                <ShieldAlert className="w-8 h-8 text-amber-600 shrink-0 mt-1" />
+                <div>
+                  <h4 className="font-bold text-xl mb-2">Regulatory Warning (Taiwan FDA)</h4>
+                  <p className="font-medium opacity-90 leading-relaxed">
+                    HIF-PHI currently does not have Taiwan FDA indication for Non-dialysis CKD.
+                  </p>
+                </div>
+              </div>
+            )}
+
             {(stage !== Stage.ESAManagement || esaStep === 4) && <ResultBox result={recommendation} />}
           </div>
 
