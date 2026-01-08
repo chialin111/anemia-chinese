@@ -870,15 +870,9 @@ export default function App() {
       {/* Footer */}
       <footer className="max-w-4xl mx-auto px-6 mt-20 mb-12 text-center text-slate-500 text-sm font-medium">
         <p className="mb-2">© 2026 KDIGO 貧血管理工具。僅供教育使用。</p>
-        <p className="mb-8 opacity-80">參考文獻：KDIGO 慢性腎病貧血臨床實踐指南。</p>
 
-        <div className="border-t border-slate-200/60 pt-8 max-w-2xl mx-auto">
-          <p className="uppercase tracking-widest text-xs font-bold text-slate-400 mb-4">主要文獻</p>
-          <ul className="space-y-3 text-slate-500 text-xs md:text-sm opacity-90">
-            <li>1. Kidney International (2012) 2, 279–335; doi:10.1038/kisup.2012.33</li>
-            <li>2. Updates on HIF-PH Inhibitors in CKD Anemia (2024/2025 Clinical Reviews)</li>
-          </ul>
-        </div>
+
+
       </footer>
     </div>
   );
