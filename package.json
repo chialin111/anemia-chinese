@@ -2,6 +2,7 @@
   "name": "anemia-management-assistant-based-on-2026-kdigo-guidelines",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://chialin111.github.io/anemia-chinese/",
   "type": "module",
   "scripts": {
     "dev": "vite",
