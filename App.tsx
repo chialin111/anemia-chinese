@@ -870,9 +870,7 @@ export default function App() {
       {/* Footer */}
       <footer className="max-w-4xl mx-auto px-6 mt-20 mb-12 text-center text-slate-500 text-sm font-medium">
         <p className="mb-2">© 2026 KDIGO 貧血管理工具。僅供教育使用。</p>
-
-
-
+        <p className="mb-8 opacity-80">參考文獻：Kidney Int. 2026 Jan;109(1S):S1-S99</p>
       </footer>
     </div>
   );
