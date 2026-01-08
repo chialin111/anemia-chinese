@@ -171,6 +171,7 @@ const initialPatientState: PatientState = {
   highCRP: false,
   accessToRefrigeration: true,
   preference: null,
+  // Add defaults for new fields if any
 };
 
 export default function App() {
@@ -186,10 +187,10 @@ export default function App() {
   const resultRef = useRef<HTMLDivElement>(null);
 
   const stages = [
-    { id: Stage.Screening, label: 'Demographics' },
-    { id: Stage.IronTherapy, label: 'Iron Indices' },
-    { id: Stage.FullWorkup, label: 'Diff. Diagnosis' },
-    { id: Stage.ESAManagement, label: 'Therapeutic Selection' },
+    { id: Stage.Screening, label: '基本資料' },
+    { id: Stage.IronTherapy, label: '鐵指數' },
+    { id: Stage.FullWorkup, label: '鑑別診斷' },
+    { id: Stage.ESAManagement, label: '治療選擇' },
   ];
 
   const updatePatient = (field: keyof PatientState, value: any) => {
@@ -334,14 +335,14 @@ export default function App() {
                 )}
               </div>
               <div className="flex flex-col">
-                <span>Anemia Management Assistant</span>
-                <span className="text-xs md:text-lg font-medium text-cyan-100 opacity-90 mt-0.5 md:mt-1">(based on 2026 KDIGO Guideline)</span>
+                <span>貧血管理助手 (Anemia Assistant)</span>
+                <span className="text-xs md:text-lg font-medium text-cyan-100 opacity-90 mt-0.5 md:mt-1">(基於 2026 KDIGO 指南)</span>
               </div>
             </h1>
-            <p className="text-indigo-100 text-xs md:text-base mt-2 md:mt-3 font-medium opacity-90 ml-1">Clinical Decision Support System</p>
+            <p className="text-indigo-100 text-xs md:text-base mt-2 md:mt-3 font-medium opacity-90 ml-1">臨床決策支持系統 (CDSS)</p>
           </div>
           <div className="hidden md:block text-sm text-cyan-100 border border-white/20 bg-white/10 px-5 py-2.5 rounded-full font-semibold backdrop-blur-md shadow-sm">
-            Professional Edition • v1.1
+            專業版 • v1.1
           </div>
         </div>
       </header>
@@ -349,7 +350,6 @@ export default function App() {
       {/* Main Content */}
       <main className="max-w-4xl mx-auto mt-10 px-4 md:px-6">
 
-        {/* Progress Stepper - Optimized Visuals */}
         {/* Progress Stepper - Optimized Visuals & Sticky Navigation */}
         <div className="sticky top-0 z-40 bg-slate-100/95 backdrop-blur-sm py-4 -mx-4 md:-mx-6 px-4 md:px-14 mb-10 shadow-sm border-b border-slate-200/50 transition-all">
           <div className="flex justify-between items-start relative max-w-4xl mx-auto">
@@ -389,41 +389,41 @@ export default function App() {
                   <div className="p-3 bg-sky-100 rounded-xl text-sky-600">
                     <Droplet className="w-6 h-6 md:w-8 md:h-8" strokeWidth={2.5} />
                   </div>
-                  <h2 className="text-xl md:text-3xl font-bold text-slate-800">Patient Demographics & Labs</h2>
+                  <h2 className="text-xl md:text-3xl font-bold text-slate-800">患者基本資料與實驗室數據</h2>
                 </div>
-                <p className="text-slate-500 text-lg pl-1">Enter initial parameters to stratify patient risk.</p>
+                <p className="text-slate-500 text-lg pl-1">輸入初始參數以進行患者風險分層。</p>
               </div>
 
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
-                  <Label>Patient Stratification (CKD Stage)</Label>
+                  <Label>患者分群 (CKD 階段)</Label>
                   <Select
                     value={patient.group || ''}
                     onChange={(e) => updatePatient('group', e.target.value as PatientGroup)}
                   >
-                    <option value="" disabled>Select Cohort...</option>
+                    <option value="" disabled>選擇分群...</option>
                     {Object.values(PatientGroup).map(g => (
                       <option key={g} value={g}>{g}</option>
                     ))}
                   </Select>
                 </div>
                 <div>
-                  <Label>Biological Sex</Label>
+                  <Label>生理性別</Label>
                   <Select
                     value={patient.gender || ''}
                     onChange={(e) => updatePatient('gender', e.target.value as Gender)}
                   >
-                    <option value="" disabled>Select Sex...</option>
+                    <option value="" disabled>選擇性別...</option>
                     {Object.values(Gender).map(g => (
                       <option key={g} value={g}>{g}</option>
                     ))}
                   </Select>
                 </div>
                 <div className="md:col-span-1">
-                  <Label icon={<Thermometer className="w-4 h-4" />}>Hemoglobin Concentration (Hb) [g/dL]</Label>
+                  <Label icon={<Thermometer className="w-4 h-4" />}>血紅素濃度 (Hb) [g/dL]</Label>
                   <Input
                     type="number"
-                    placeholder="e.g. 10.5"
+                    placeholder="例如 10.5"
                     value={patient.hb}
                     onChange={(e) => updatePatient('hb', e.target.value === '' ? '' : parseFloat(e.target.value))}
                   />
@@ -440,26 +440,26 @@ export default function App() {
                   <div className="p-3 bg-indigo-100 rounded-xl text-indigo-600">
                     <Syringe className="w-8 h-8" strokeWidth={2.5} />
                   </div>
-                  <h2 className="text-3xl font-bold text-slate-800">Iron Status Assessment</h2>
+                  <h2 className="text-3xl font-bold text-slate-800">鐵狀態評估</h2>
                 </div>
-                <p className="text-slate-500 text-lg pl-1">Evaluate absolute and functional iron deficiency.</p>
+                <p className="text-slate-500 text-lg pl-1">評估絕對與功能性缺鐵。</p>
               </div>
 
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
-                  <Label>Serum Ferritin [ng/ml]</Label>
+                  <Label>血清鐵蛋白 [ng/ml]</Label>
                   <Input
                     type="number"
-                    placeholder="e.g. 50"
+                    placeholder="例如 50"
                     value={patient.ferritin}
                     onChange={(e) => updatePatient('ferritin', e.target.value === '' ? '' : parseFloat(e.target.value))}
                   />
                 </div>
                 <div>
-                  <Label>Transferrin Saturation (TSAT) [%]</Label>
+                  <Label>轉鐵蛋白飽和度 (TSAT) [%]</Label>
                   <Input
                     type="number"
-                    placeholder="e.g. 20"
+                    placeholder="例如 20"
                     value={patient.tsat}
                     onChange={(e) => updatePatient('tsat', e.target.value === '' ? '' : parseFloat(e.target.value))}
                   />
@@ -473,28 +473,28 @@ export default function App() {
                     className="flex items-center text-base font-bold text-indigo-600 hover:text-indigo-800 transition-all mb-4 group bg-indigo-50 hover:bg-indigo-100 px-4 py-2 rounded-lg"
                   >
                     <Calculator className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-                    {showCalculator ? 'Hide Calculator' : 'Calculate TSAT from Serum Iron & TIBC'}
+                    {showCalculator ? '隱藏計算機' : '從血清鐵與 TIBC 計算 TSAT'}
                   </button>
 
                   {showCalculator && (
                     <div className="bg-slate-50/80 p-6 rounded-2xl border border-slate-200 grid grid-cols-2 gap-6 animate-fade-in shadow-inner">
                       <div className="col-span-2 text-slate-500 text-sm mb-1 flex items-center gap-2 font-medium">
-                        <Info className="w-4 h-4 text-indigo-400" /> Formula: TSAT = (Serum Iron / TIBC) × 100
+                        <Info className="w-4 h-4 text-indigo-400" /> 公式：TSAT = (血清鐵 / TIBC) × 100
                       </div>
                       <div>
-                        <label className="block text-sm font-bold text-slate-600 mb-2">Serum Iron [µg/dL]</label>
+                        <label className="block text-sm font-bold text-slate-600 mb-2">血清鐵 [µg/dL]</label>
                         <Input
                           type="number"
-                          placeholder="e.g. 60"
+                          placeholder="例如 60"
                           value={patient.serumIron}
                           onChange={(e) => handleCalculatorUpdate('serumIron', e.target.value)}
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-bold text-slate-600 mb-2">Total Iron Binding Capacity (TIBC) [µg/dL]</label>
+                        <label className="block text-sm font-bold text-slate-600 mb-2">總鐵結合力 (TIBC) [µg/dL]</label>
                         <Input
                           type="number"
-                          placeholder="e.g. 300"
+                          placeholder="例如 300"
                           value={patient.tibc}
                           onChange={(e) => handleCalculatorUpdate('tibc', e.target.value)}
                         />
@@ -505,7 +505,7 @@ export default function App() {
 
                 <div className="flex flex-col justify-end md:col-span-2 mt-2">
                   <Checkbox
-                    label="Presence of Active Systemic Infection?"
+                    label="存在活動性全身感染？ (Presence of Active Systemic Infection)"
                     checked={patient.hasActiveInfection}
                     onChange={(val) => updatePatient('hasActiveInfection', val)}
                     variant="danger"
@@ -517,7 +517,7 @@ export default function App() {
                 <div className="bg-sky-200 p-1.5 rounded-full shrink-0">
                   <Info className="w-5 h-5 text-sky-700" />
                 </div>
-                <span><span className="font-bold">Patient Profile Summary:</span> {patient.group} • Hb {patient.hb} g/dL</span>
+                <span><span className="font-bold">患者資料摘要：</span> {patient.group} • Hb {patient.hb} g/dL</span>
               </div>
             </div>
           )}
@@ -530,16 +530,16 @@ export default function App() {
                   <div className="p-3 bg-violet-100 rounded-xl text-violet-600">
                     <Stethoscope className="w-8 h-8" strokeWidth={2.5} />
                   </div>
-                  <h2 className="text-3xl font-bold text-slate-800">Differential Diagnosis</h2>
+                  <h2 className="text-3xl font-bold text-slate-800">鑑別診斷</h2>
                 </div>
-                <p className="text-slate-500 text-lg pl-1">Rule out secondary non-renal etiologies.</p>
+                <p className="text-slate-500 text-lg pl-1">排除繼發性非腎性病因。</p>
               </div>
 
               <div className="space-y-6">
                 {/* Success Case */}
                 <Checkbox
                   variant="success"
-                  label="Exclusion of secondary causes (Diagnosis: Anemia of CKD)"
+                  label="排除繼發性原因（診斷：慢性腎病貧血）"
                   checked={patient.workupAllNegative}
                   onChange={(val) => toggleWorkupItem('workupAllNegative', val)}
                 />
@@ -550,62 +550,62 @@ export default function App() {
                     <div className="w-full border-t border-slate-200"></div>
                   </div>
                   <div className="relative flex justify-center">
-                    <span className="bg-white px-4 text-sm text-slate-400 uppercase tracking-widest font-extrabold">Identify Positive Findings</span>
+                    <span className="bg-white px-4 text-sm text-slate-400 uppercase tracking-widest font-extrabold">確認陽性發現</span>
                   </div>
                 </div>
 
                 {/* Positive Findings */}
                 <div className="grid md:grid-cols-2 gap-4">
                   <Checkbox
-                    label="Abnormal Peripheral Blood Smear"
+                    label="周邊血液抹片異常"
                     checked={patient.workupSmear}
                     onChange={(val) => toggleWorkupItem('workupSmear', val)}
                     variant="danger"
                   />
                   <Checkbox
-                    label="Hemolysis (Abnormal Haptoglobin/LDH)"
+                    label="溶血（結合珠蛋白/LDH 異常）"
                     checked={patient.workupHemolysis}
                     onChange={(val) => toggleWorkupItem('workupHemolysis', val)}
                     variant="danger"
                   />
                   <Checkbox
-                    label="Elevated CRP (Inflammation)"
+                    label="CRP 升高（發炎）"
                     checked={patient.workupInflammation}
                     onChange={(val) => toggleWorkupItem('workupInflammation', val)}
                     variant="danger"
                   />
                   <Checkbox
-                    label="Vitamin B12 or Folate Deficiency"
+                    label="維生素 B12 或葉酸缺乏"
                     checked={patient.workupB12Folate}
                     onChange={(val) => toggleWorkupItem('workupB12Folate', val)}
                     variant="danger"
                   />
                   <Checkbox
-                    label="Hepatic Dysfunction (LFTs)"
+                    label="肝功能異常 (LFTs)"
                     checked={patient.workupLiver}
                     onChange={(val) => toggleWorkupItem('workupLiver', val)}
                     variant="danger"
                   />
                   <Checkbox
-                    label="Thyroid Dysfunction (TSH)"
+                    label="甲狀腺功能異常 (TSH)"
                     checked={patient.workupThyroid}
                     onChange={(val) => toggleWorkupItem('workupThyroid', val)}
                     variant="danger"
                   />
                   <Checkbox
-                    label="Hyperparathyroidism (Elevated PTH)"
+                    label="甲狀旁腺功能亢進 (PTH 升高)"
                     checked={patient.workupParathyroid}
                     onChange={(val) => toggleWorkupItem('workupParathyroid', val)}
                     variant="danger"
                   />
                   <Checkbox
-                    label="Paraproteinemia (M-protein/Light chains)"
+                    label="副蛋白血症（M 蛋白/輕鏈）"
                     checked={patient.workupMyeloma}
                     onChange={(val) => toggleWorkupItem('workupMyeloma', val)}
                     variant="danger"
                   />
                   <Checkbox
-                    label="Parasitic Infection (If indicated)"
+                    label="寄生蟲感染（如有指徵）"
                     checked={patient.workupParasites}
                     onChange={(val) => toggleWorkupItem('workupParasites', val)}
                     variant="danger"
@@ -623,9 +623,9 @@ export default function App() {
                   <div className="p-3 bg-teal-100 rounded-xl text-teal-600">
                     <Pill className="w-8 h-8" strokeWidth={2.5} />
                   </div>
-                  <h2 className="text-3xl font-bold text-slate-800">Pharmacological Management</h2>
+                  <h2 className="text-3xl font-bold text-slate-800">藥物治療管理</h2>
                 </div>
-                <p className="text-slate-500 text-lg pl-1">Sequential assessment for ESA vs. HIF-PHI selection.</p>
+                <p className="text-slate-500 text-lg pl-1">ESA 與 HIF-PHI 選擇的循序評估。</p>
               </div>
 
               <div className="space-y-12">
@@ -634,73 +634,73 @@ export default function App() {
                 <div className="bg-rose-50/50 p-6 md:p-8 rounded-2xl border border-rose-100 animate-fade-in shadow-sm">
                   <h3 className="text-2xl font-bold text-rose-800 mb-2 flex items-center gap-3">
                     <div className="bg-rose-200 p-1.5 rounded-lg"><ShieldAlert className="w-6 h-6 text-rose-700" /></div>
-                    Tier 1: Contraindications & Safety Profiles
+                    第 1 層：禁忌症與安全性
                   </h3>
-                  <p className="text-sm text-rose-600/80 mb-6 font-bold uppercase tracking-wide ml-12">Identify Major Risk Factors</p>
+                  <p className="text-sm text-rose-600/80 mb-6 font-bold uppercase tracking-wide ml-12">確認主要風險因素</p>
 
                   <div className="grid md:grid-cols-2 gap-4 ml-1">
                     <Checkbox
-                      label="Current Stroke or Active Thrombosis"
+                      label="近期中風或活動性血栓"
                       checked={patient.currentStrokeOrThrombosis}
                       onChange={(val) => updatePatient('currentStrokeOrThrombosis', val)}
                       variant="danger"
                     />
                     <Checkbox
-                      label="Pregnancy"
+                      label="懷孕"
                       checked={patient.isPregnant}
                       onChange={(val) => updatePatient('isPregnant', val)}
                       variant="danger"
                     />
                     <Checkbox
-                      label="Documented Intolerance to ESA"
+                      label="有 ESA 不耐受紀錄"
                       checked={patient.esaIntolerance}
                       onChange={(val) => updatePatient('esaIntolerance', val)}
                       variant="danger"
                     />
                     <Checkbox
-                      label="Active Malignancy"
+                      label="活動性惡性腫瘤"
                       checked={patient.activeMalignancy}
                       onChange={(val) => updatePatient('activeMalignancy', val)}
                       variant="danger"
                     />
                     <Checkbox
-                      label="History of Malignancy (< 5yr remission)"
+                      label="惡性腫瘤病史（緩解小於 5 年）"
                       checked={patient.historyOfCancer}
                       onChange={(val) => updatePatient('historyOfCancer', val)}
                       variant="danger"
                     />
                     <Checkbox
-                      label="Polycystic Kidney Disease (ADPKD)"
+                      label="多囊腎 (ADPKD)"
                       checked={patient.polycysticKidneyDisease}
                       onChange={(val) => updatePatient('polycysticKidneyDisease', val)}
                       variant="danger"
                     />
                     <Checkbox
-                      label="Proliferative Retinopathy"
+                      label="增殖性視網膜病變"
                       checked={patient.proliferativeRetinalDisease}
                       onChange={(val) => updatePatient('proliferativeRetinalDisease', val)}
                       variant="danger"
                     />
                     <Checkbox
-                      label="Pulmonary Arterial Hypertension (PAH)"
+                      label="肺動脈高壓 (PAH)"
                       checked={patient.pulmonaryArterialHypertension}
                       onChange={(val) => updatePatient('pulmonaryArterialHypertension', val)}
                       variant="danger"
                     />
                     <Checkbox
-                      label="Hepatic Impairment (Child-Pugh B/C)"
+                      label="肝功能損害 (Child-Pugh B/C)"
                       checked={patient.hepaticImpairment}
                       onChange={(val) => updatePatient('hepaticImpairment', val)}
                       variant="danger"
                     />
                     <Checkbox
-                      label="History of CV Events (Stroke/MI)"
+                      label="心血管事件病史（中風/心肌梗塞）"
                       checked={patient.priorCVEvents}
                       onChange={(val) => updatePatient('priorCVEvents', val)}
                       variant="danger"
                     />
                     <Checkbox
-                      label="History of Thromboembolism (DVT/PE)"
+                      label="血栓栓塞病史 (DVT/PE)"
                       checked={patient.priorThromboembolicEvents}
                       onChange={(val) => updatePatient('priorThromboembolicEvents', val)}
                       variant="danger"
@@ -713,7 +713,7 @@ export default function App() {
                         onClick={() => setEsaStep(2)}
                         className="bg-gradient-to-r from-rose-500 to-red-600 text-white px-8 py-3.5 rounded-xl text-base font-bold hover:shadow-lg hover:shadow-rose-200 transition-all flex items-center gap-2 hover:-translate-y-1"
                       >
-                        Next: Clinical Status <ArrowDownCircle className="w-5 h-5" />
+                        下一步：臨床狀況 <ArrowDownCircle className="w-5 h-5" />
                       </button>
                     </div>
                   )}
@@ -724,17 +724,17 @@ export default function App() {
                   <div ref={tier2Ref} className="bg-indigo-50/50 p-6 md:p-8 rounded-2xl border border-indigo-100 animate-fade-in shadow-sm">
                     <h3 className="text-2xl font-bold text-indigo-800 mb-2 flex items-center gap-3">
                       <div className="bg-indigo-200 p-1.5 rounded-lg"><Activity className="w-6 h-6 text-indigo-700" /></div>
-                      Tier 2: Clinical Responsiveness
+                      第 2 層：臨床反應
                     </h3>
-                    <p className="text-sm text-indigo-600/80 mb-6 font-bold uppercase tracking-wide ml-12">Evaluate Inflammatory Status</p>
+                    <p className="text-sm text-indigo-600/80 mb-6 font-bold uppercase tracking-wide ml-12">評估發炎狀態</p>
                     <div className="grid md:grid-cols-2 gap-4 ml-1">
                       <Checkbox
-                        label="ESA Hyporesponsiveness (>300 (SC) or 450 (IV) IU/kg/week of EPO)"
+                        label="ESA 低反應性（EPO >300 (SC) 或 450 (IV) IU/kg/週）"
                         checked={patient.esaHyporesponsive}
                         onChange={(val) => updatePatient('esaHyporesponsive', val)}
                       />
                       <Checkbox
-                        label="Elevated CRP (> 0.3 mg/dl)"
+                        label="CRP 升高 (> 0.3 mg/dl)"
                         checked={patient.highCRP}
                         onChange={(val) => updatePatient('highCRP', val)}
                       />
@@ -745,7 +745,7 @@ export default function App() {
                           onClick={() => setEsaStep(3)}
                           className="bg-gradient-to-r from-indigo-500 to-blue-600 text-white px-8 py-3.5 rounded-xl text-base font-bold hover:shadow-lg hover:shadow-indigo-200 transition-all flex items-center gap-2 hover:-translate-y-1"
                         >
-                          Next: Preferences <ArrowDownCircle className="w-5 h-5" />
+                          下一步：偏好 <ArrowDownCircle className="w-5 h-5" />
                         </button>
                       </div>
                     )}
@@ -757,29 +757,29 @@ export default function App() {
                   <div ref={tier3Ref} className="bg-slate-50 p-6 md:p-8 rounded-2xl border border-slate-200 animate-fade-in shadow-sm">
                     <h3 className="text-2xl font-bold text-slate-800 mb-2 flex items-center gap-3">
                       <div className="bg-slate-200 p-1.5 rounded-lg"><User className="w-6 h-6 text-slate-700" /></div>
-                      Tier 3: Patient Preferences & Logistics
+                      第 3 層：患者偏好與後勤
                     </h3>
-                    <p className="text-sm text-slate-500 mb-6 font-bold uppercase tracking-wide ml-12">Administration Constraints</p>
+                    <p className="text-sm text-slate-500 mb-6 font-bold uppercase tracking-wide ml-12">給藥限制</p>
                     <div className="grid md:grid-cols-2 gap-4 ml-1">
                       <Checkbox
-                        label="No access to refrigeration (Cold Chain)"
+                        label="無法使用冷藏設備（冷鏈）"
                         checked={patient.accessToRefrigeration === false}
                         onChange={(val) => updatePatient('accessToRefrigeration', !val)}
                       />
                       <div className="flex flex-col gap-2">
-                        <Label>Preferred Route:</Label>
+                        <Label>偏好途徑：</Label>
                         <div className="flex gap-3">
                           <button
                             className={`flex-1 px-4 py-3 text-base font-bold rounded-xl border-2 transition-all ${patient.preference === 'Oral' ? 'bg-indigo-600 text-white border-indigo-600 shadow-md transform scale-[1.02]' : 'bg-white border-slate-200 text-slate-500 hover:border-indigo-300 hover:text-indigo-600'}`}
                             onClick={() => updatePatient('preference', 'Oral')}
                           >
-                            Oral
+                            口服 (Oral)
                           </button>
                           <button
                             className={`flex-1 px-4 py-3 text-base font-bold rounded-xl border-2 transition-all ${patient.preference === 'Injection' ? 'bg-indigo-600 text-white border-indigo-600 shadow-md transform scale-[1.02]' : 'bg-white border-slate-200 text-slate-500 hover:border-indigo-300 hover:text-indigo-600'}`}
                             onClick={() => updatePatient('preference', 'Injection')}
                           >
-                            Injection
+                            注射 (Injection)
                           </button>
                         </div>
                       </div>
@@ -790,7 +790,7 @@ export default function App() {
                           onClick={() => setEsaStep(4)}
                           className="bg-gradient-to-r from-teal-500 to-emerald-600 text-white px-10 py-4 rounded-xl text-lg font-bold hover:shadow-xl hover:shadow-teal-200 transition-all flex items-center gap-3 hover:-translate-y-1"
                         >
-                          Generate Clinical Recommendation <CheckCircle className="w-6 h-6" />
+                          生成臨床建議 <CheckCircle className="w-6 h-6" />
                         </button>
                       </div>
                     )}
@@ -803,15 +803,15 @@ export default function App() {
           {/* RECOMMENDATION DISPLAY */}
           <div ref={resultRef}>
             {/* Regulatory Warning for ND-CKD + HIF-PHI */}
-            {recommendation?.title.includes('Recommendation: HIF-PHI') && patient.group === PatientGroup.ND_CKD && (
+            {recommendation?.title.includes('建議：HIF-PHI') && patient.group && patient.group.includes('非透析') && ( // includes check for Chinese string
               <div className="space-y-4 mb-8 mt-6 animate-fade-in">
                 {/* Compact Warning Box */}
                 <div className="bg-amber-50 border-l-4 border-amber-500 text-amber-900 p-4 rounded-r-xl shadow-sm flex items-center gap-3">
                   <ShieldAlert className="w-5 h-5 text-amber-600 shrink-0" />
                   <div>
-                    <h4 className="font-bold text-base">Regulatory Warning (Taiwan FDA)</h4>
+                    <h4 className="font-bold text-base">法規警示 (台灣 FDA)</h4>
                     <p className="text-sm font-medium opacity-90">
-                      HIF-PHI currently does not have Taiwan FDA indication for Non-dialysis CKD.
+                      HIF-PHI 目前在台灣尚未取得非透析 CKD 的健保給付規定或適應症（需再次確認最新仿單）。
                     </p>
                   </div>
                 </div>
@@ -820,15 +820,15 @@ export default function App() {
                 <div className="bg-slate-50 border border-slate-200 p-5 rounded-xl">
                   <h4 className="font-bold text-slate-700 flex items-center gap-2 mb-2">
                     <Activity className="w-4 h-4 text-slate-500" />
-                    Clinical Strategy: Shared Decision Making (SDM)
+                    臨床策略：共同決策 (SDM)
                   </h4>
                   <p className="text-sm text-slate-600 mb-2 leading-relaxed">
-                    This patient category presents a therapeutic dilemma: <strong>Intolerance to ESA</strong> (Standard of Care) but <strong>HIF-PHI is off-label</strong>.
+                    此類患者面臨治療困境：<strong>ESA 不耐受</strong> (標準治療) 但 <strong>HIF-PHI 可能為仿單標示外使用</strong>。
                   </p>
                   <ul className="text-sm text-slate-600 space-y-1 list-disc list-inside bg-white p-3 rounded-lg border border-slate-100">
-                    <li>Discuss the risks/benefits of off-label use.</li>
-                    <li>Evaluate alternative options (e.g., Red Cell Transfusion if symptomatic).</li>
-                    <li>Consult Nephrologist/Hematologist for expert opinion.</li>
+                    <li>討論仿單標示外使用的風險/效益。</li>
+                    <li>評估替代方案（例如：有症狀時給予紅血球輸血）。</li>
+                    <li>諮詢腎臟科/血液科專家意見。</li>
                   </ul>
                 </div>
               </div>
@@ -844,7 +844,7 @@ export default function App() {
               disabled={stage === 1}
               className={`flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-base transition-colors ${stage === 1 ? 'text-slate-300 cursor-not-allowed' : 'text-slate-500 hover:bg-slate-100 hover:text-indigo-700'}`}
             >
-              <ChevronLeft className="w-5 h-5" /> Back
+              <ChevronLeft className="w-5 h-5" /> 返回
             </button>
 
 
@@ -859,7 +859,7 @@ export default function App() {
                     : 'bg-gradient-to-r from-indigo-600 to-blue-600 text-white hover:from-indigo-700 hover:to-blue-700 hover:shadow-indigo-200 hover:-translate-y-1'}
                 `}
               >
-                Proceed <ChevronRight className="w-6 h-6" />
+                繼續 <ChevronRight className="w-6 h-6" />
               </button>
             )}
           </div>
@@ -869,11 +869,11 @@ export default function App() {
 
       {/* Footer */}
       <footer className="max-w-4xl mx-auto px-6 mt-20 mb-12 text-center text-slate-500 text-sm font-medium">
-        <p className="mb-2">© 2026 KDIGO Anemia Management Tool. For Educational Use Only.</p>
-        <p className="mb-8 opacity-80">Reference: KDIGO Clinical Practice Guidelines for Anemia in Chronic Kidney Disease.</p>
+        <p className="mb-2">© 2026 KDIGO 貧血管理工具。僅供教育使用。</p>
+        <p className="mb-8 opacity-80">參考文獻：KDIGO 慢性腎病貧血臨床實踐指南。</p>
 
         <div className="border-t border-slate-200/60 pt-8 max-w-2xl mx-auto">
-          <p className="uppercase tracking-widest text-xs font-bold text-slate-400 mb-4">Primary Literature</p>
+          <p className="uppercase tracking-widest text-xs font-bold text-slate-400 mb-4">主要文獻</p>
           <ul className="space-y-3 text-slate-500 text-xs md:text-sm opacity-90">
             <li>1. Kidney International (2012) 2, 279–335; doi:10.1038/kisup.2012.33</li>
             <li>2. Updates on HIF-PH Inhibitors in CKD Anemia (2024/2025 Clinical Reviews)</li>

@@ -1,14 +1,14 @@
 
 export enum PatientGroup {
-  HD = 'Hemodialysis (HD)',
-  PD = 'Peritoneal Dialysis (PD)',
-  ND_CKD = 'Non-Dialysis CKD',
-  KTx = 'Kidney Transplant (KTx)',
+  HD = '血液透析 (HD)',
+  PD = '腹膜透析 (PD)',
+  ND_CKD = '非透析慢性腎病 (ND-CKD)',
+  KTx = '腎臟移植 (KTx)',
 }
 
 export enum Gender {
-  Male = 'Male',
-  Female = 'Female',
+  Male = '男性',
+  Female = '女性',
 }
 
 export enum Stage {
