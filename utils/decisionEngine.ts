@@ -109,7 +109,8 @@ export const evaluateIronTherapy = (data: PatientState): DecisionResult => {
       message: `建議給藥途徑：${route}`,
       details: [
         rationale,
-        `每 ${data.group === PatientGroup.HD ? '月' : '3 個月'} 監測一次 Hb、Ferritin 和 TSAT。`
+        `每 ${data.group === PatientGroup.HD ? '月' : '3 個月'} 監測一次 Hb、Ferritin 和 TSAT。`,
+        ...(data.group === PatientGroup.HD ? ['Withhold iron therapy if ferritin >700 ng/ml (ug/l) or TSAT ≥40%'] : [])
       ],
       recommendationType: 'treatment'
     };
