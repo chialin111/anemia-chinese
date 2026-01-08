@@ -605,7 +605,7 @@ export default function App() {
                     variant="danger"
                   />
                   <Checkbox
-                    label="寄生蟲感染（如有指徵）"
+                    label="寄生蟲感染（如果懷疑）"
                     checked={patient.workupParasites}
                     onChange={(val) => toggleWorkupItem('workupParasites', val)}
                     variant="danger"
