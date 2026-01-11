@@ -455,7 +455,7 @@ export default function App() {
 
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
-                  <Label>血清鐵蛋白 [ng/ml]</Label>
+                  <Label>血清鐵蛋白 (ferritin) [ng/ml]</Label>
                   <Input
                     type="number"
                     placeholder="例如 50"
@@ -481,16 +481,16 @@ export default function App() {
                     className="flex items-center text-base font-bold text-indigo-600 hover:text-indigo-800 transition-all mb-4 group bg-indigo-50 hover:bg-indigo-100 px-4 py-2 rounded-lg"
                   >
                     <Calculator className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-                    {showCalculator ? '隱藏計算機' : '從血清鐵與 TIBC 計算 TSAT'}
+                    {showCalculator ? '隱藏計算機' : '從血清鐵 (Fe) 與 TIBC 計算 TSAT'}
                   </button>
 
                   {showCalculator && (
                     <div className="bg-slate-50/80 p-6 rounded-2xl border border-slate-200 grid grid-cols-2 gap-6 animate-fade-in shadow-inner">
                       <div className="col-span-2 text-slate-500 text-sm mb-1 flex items-center gap-2 font-medium">
-                        <Info className="w-4 h-4 text-indigo-400" /> 公式：TSAT = (血清鐵 / TIBC) × 100
+                        <Info className="w-4 h-4 text-indigo-400" /> 公式：TSAT = (血清鐵 (Fe) / TIBC) × 100
                       </div>
                       <div>
-                        <label className="block text-sm font-bold text-slate-600 mb-2">血清鐵 [µg/dL]</label>
+                        <label className="block text-sm font-bold text-slate-600 mb-2">血清鐵 (Fe) [µg/dL]</label>
                         <Input
                           type="number"
                           placeholder="例如 60"
