@@ -240,7 +240,7 @@ export const evaluateESA = (data: PatientState): DecisionResult => {
       title: '建議：ESA',
       message: '臨床病史顯示 ESA 為首選。',
       details: [
-        '第 1 層標準（傾向 ESA）：',
+        'HIF-PHI 相對禁忌症或需謹慎使用：',
         ...tier1FavorESA,
         '這些情況下通常不建議使用 HIF-PHI 或需謹慎使用。',
         '使用最低有效劑量。'
@@ -256,7 +256,7 @@ export const evaluateESA = (data: PatientState): DecisionResult => {
       title: '建議：HIF-PHI',
       message: '臨床病史（ESA 不耐受）顯示 HIF-PHI 為首選。',
       details: [
-        '第 1 層標準（傾向 HIF-PHI）：',
+        '建議原因（ESA 不耐受）：',
         '無法耐受 ESA（過敏、高血壓、凝血）',
         '每 2-4 週監測一次 Hb。'
       ],
@@ -275,7 +275,7 @@ export const evaluateESA = (data: PatientState): DecisionResult => {
       title: '建議：HIF-PHI',
       message: '臨床狀況顯示 HIF-PHI 為首選替代方案。',
       details: [
-        '第 2 層標準（傾向 HIF-PHI）：',
+        '建議原因：',
         ...tier2Reasons,
         '如果 3-4 個月後反應不足，請停藥。',
         '每 2-4 週監測一次 Hb。'
@@ -295,7 +295,7 @@ export const evaluateESA = (data: PatientState): DecisionResult => {
       title: '建議：HIF-PHI',
       message: '患者偏好或後勤因素傾向 HIF-PHI。',
       details: [
-        '第 3 層標準（傾向 HIF-PHI）：',
+        '建議原因：',
         ...tier3Reasons,
         '如果 3-4 個月後反應不足，請停藥。'
       ],
@@ -309,7 +309,7 @@ export const evaluateESA = (data: PatientState): DecisionResult => {
     title: '建議：ESA',
     message: '標準一線治療。',
     details: [
-      '未觸發特定的第 1、2 或 3 層選擇標準。',
+      '未符合其他特定優先建議條件。',
       'ESA 是標準治療（靜脈/皮下）。',
       '每 2-4 週監測一次 Hb。',
       '不要將 Hb 維持在 >= 11.5 g/dL。'
