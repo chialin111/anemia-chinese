@@ -91,7 +91,7 @@ export const evaluateIronTherapy = (data: PatientState): DecisionResult => {
       rationale = '血液透析患者的標準治療。';
     }
   } else {
-    // Non-HD Groups (PD, ND-CKD, KTx)
+    // Non-HD Groups (PD, ND-CKD)
     if (
       (data.ferritin < 100 && data.tsat < 40) ||
       (data.ferritin >= 100 && data.ferritin <= 300 && data.tsat < 25)

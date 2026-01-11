@@ -3,7 +3,7 @@ export enum PatientGroup {
   HD = '血液透析 (HD)',
   PD = '腹膜透析 (PD)',
   ND_CKD = '非透析慢性腎病 (ND-CKD)',
-  KTx = '腎臟移植 (KTx)',
+
 }
 
 export enum Gender {
@@ -23,14 +23,14 @@ export interface PatientState {
   group: PatientGroup | null;
   gender: Gender | null;
   hb: number | '';
-  
+
   // Stage 2
   ferritin: number | '';
   tsat: number | '';
   serumIron: number | ''; // Calculator input
   tibc: number | '';      // Calculator input
   hasActiveInfection: boolean;
-  
+
   // Stage 3 - Detailed Workup Checklist
   workupAllNegative: boolean;
   workupSmear: boolean;
