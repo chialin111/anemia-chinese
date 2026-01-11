@@ -529,7 +529,7 @@ export default function App() {
                 <div className="bg-sky-200 p-1.5 rounded-full shrink-0">
                   <Info className="w-5 h-5 text-sky-700" />
                 </div>
-                <span><span className="font-bold">患者資料摘要：</span> {patient.group} • Hb {patient.hb} g/dL</span>
+                <span><span className="font-bold">患者資料摘要：</span> {patient.group} • Hb {patient.hb} g/dL • Ferritin {patient.ferritin || '-'} ng/ml • TSAT {patient.tsat || '-'} %</span>
               </div>
             </div>
           )}
