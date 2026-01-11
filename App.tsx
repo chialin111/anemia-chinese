@@ -198,6 +198,9 @@ export default function App() {
     if (['hb', 'ferritin', 'tsat', 'serumIron', 'tibc'].includes(field)) {
       if (typeof value === 'number' && value < 0) return;
     }
+    // Validation: prevent TSAT > 100
+    if (field === 'tsat' && typeof value === 'number' && value > 100) return;
+
     setPatient(prev => ({ ...prev, [field]: value }));
     setRecommendation(null);
   };
@@ -245,6 +248,7 @@ export default function App() {
 
     if (currentIron !== '' && currentTibc !== '' && currentTibc !== 0) {
       newTsat = Math.round(((currentIron as number) / (currentTibc as number)) * 100);
+      if (newTsat > 100) newTsat = 100;
     }
 
     setPatient(prev => ({
