@@ -551,7 +551,7 @@ export default function App() {
                 {/* Success Case */}
                 <Checkbox
                   variant="success"
-                  label="排除繼發性原因（診斷：慢性腎病貧血）"
+                  label="排除繼發性原因 (可診斷為慢性腎性貧血)"
                   checked={patient.workupAllNegative}
                   onChange={(val) => toggleWorkupItem('workupAllNegative', val)}
                 />
