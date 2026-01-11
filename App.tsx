@@ -194,6 +194,10 @@ export default function App() {
   ];
 
   const updatePatient = (field: keyof PatientState, value: any) => {
+    // Validation: prevent negative values for numeric fields
+    if (['hb', 'ferritin', 'tsat', 'serumIron', 'tibc'].includes(field)) {
+      if (typeof value === 'number' && value < 0) return;
+    }
     setPatient(prev => ({ ...prev, [field]: value }));
     setRecommendation(null);
   };
@@ -231,6 +235,10 @@ export default function App() {
 
   const handleCalculatorUpdate = (field: 'serumIron' | 'tibc', value: any) => {
     const numValue = value === '' ? '' : parseFloat(value);
+
+    // Validation: prevent negative values
+    if (typeof numValue === 'number' && numValue < 0) return;
+
     const currentIron = field === 'serumIron' ? numValue : patient.serumIron;
     const currentTibc = field === 'tibc' ? numValue : patient.tibc;
     let newTsat = patient.tsat;
