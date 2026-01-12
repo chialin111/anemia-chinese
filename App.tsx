@@ -790,7 +790,7 @@ export default function App() {
                           </button>
                         </div>
                       </div>
-                      <div className="transform scale-90 origin-top-left md:origin-top-left">
+                      <div className="transform scale-90 origin-top-left md:origin-top-left md:mt-8">
                         <Checkbox
                           label="無法使用冷藏(冷鏈)設備"
                           checked={patient.accessToRefrigeration === false}
