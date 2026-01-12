@@ -110,7 +110,7 @@ export const evaluateIronTherapy = (data: PatientState): DecisionResult => {
       details: [
         rationale,
         `每 ${data.group === PatientGroup.HD ? '月' : '3 個月'} 監測一次 Hb、Ferritin 和 TSAT。`,
-        '若 Ferritin > 700 ng/ml 或 TSAT ≥ 40%，應暫停鐵劑治療'
+        '若達 Ferritin >700 ng/ml 或 TSAT ≥40%，應暫停鐵劑治療'
       ],
       recommendationType: 'treatment'
     };
