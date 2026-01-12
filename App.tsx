@@ -773,11 +773,6 @@ export default function App() {
                     </h3>
                     <p className="text-sm text-slate-500 mb-6 font-bold uppercase tracking-wide ml-12">給藥限制</p>
                     <div className="grid md:grid-cols-2 gap-4 ml-1">
-                      <Checkbox
-                        label="無法使用冷藏設備（冷鏈）"
-                        checked={patient.accessToRefrigeration === false}
-                        onChange={(val) => updatePatient('accessToRefrigeration', !val)}
-                      />
                       <div className="flex flex-col gap-2">
                         <Label>偏好途徑：</Label>
                         <div className="flex gap-3">
@@ -794,6 +789,13 @@ export default function App() {
                             注射 (Injection)
                           </button>
                         </div>
+                      </div>
+                      <div className="transform scale-90 origin-top-left md:origin-top-left">
+                        <Checkbox
+                          label="無法使用冷藏(冷鏈)設備"
+                          checked={patient.accessToRefrigeration === false}
+                          onChange={(val) => updatePatient('accessToRefrigeration', !val)}
+                        />
                       </div>
                     </div>
                     {esaStep === 3 && (
